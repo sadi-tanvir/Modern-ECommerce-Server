@@ -14,7 +14,11 @@ const books = [
 
 const authorResolver = {
     Query: {
-        books: () => books,
+        books: (_:any, args:any, context:any) => {
+            console.log(context);
+            
+            return books
+        },
     },
 };
 
