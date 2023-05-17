@@ -1,4 +1,5 @@
 import globalSchema from "./global.schema"
+import userSchema from "./user.schema"
 
 const rootSchema = `
     type Query {
@@ -11,5 +12,6 @@ const rootSchema = `
 
 export default [
     rootSchema,
-    globalSchema
+    globalSchema,
+    userSchema
 ]

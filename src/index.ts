@@ -11,6 +11,9 @@ import Schema from "./gql/schemas/index";
 import resolvers from './gql/resolvers';
 import context from "./middlewares/context"
 
+// database
+import "./database/connection/db"
+
 // routes
 import userRoutes from "./express/routes/user.routes"
 
@@ -24,12 +27,11 @@ const server = new ApolloServer({
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-
 await server.start();
 
 // Middleware
 app.use('/', cors<cors.CorsRequest>(), bodyParser.json());
-// app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 app.use("/graphql", expressMiddleware(server, { context }));
 
 // routes

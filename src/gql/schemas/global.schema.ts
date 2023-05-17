@@ -7,4 +7,9 @@ export default `
   type Query {
     books: [Book]
   }
+
+  type GeneralResponse {
+    status: Boolean!
+    message: String!
+  }
 `
