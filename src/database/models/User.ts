@@ -71,4 +71,4 @@ const userSchema = new Schema<UserSchemaType>({
     }
 }, { timestamps: true });
 
-export default model<UserSchemaType>('User', userSchema)
+export default model<UserSchemaType>('User', userSchema);

@@ -1,15 +1,22 @@
-import express from "express";
+import express, { Request, Response } from "express";
+import User from "../../database/models/User";
 const router = express.Router();
 
 
 
 
-router.get('/', (req: any, res: any) => {
-    console.warn('req', req);
+router.get('/verify-email/:token', async (req: Request, res: Response) => {
+
+    const _user = await User.findOne({ authToken: req.params.token })
+    if (!_user) return res.json({ status: false, message: 'invalid token!' })
+
+    _user.authToken = 'verified';
+    _user.accountStatus = 'active'
+    await _user.save()
 
     res.json({
-        name: 'tanvir hossain sadi',
-        email: 'sadi@gmail.com.express',
+        status: true,
+        message: 'You have successfully done your job.',
     })
 })
 
