@@ -67,7 +67,7 @@ const userSchema = new Schema<UserSchemaType>({
     },
     darkMode: {
         type: Boolean,
-        default: true
+        default: false
     }
 }, { timestamps: true });
 

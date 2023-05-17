@@ -1,24 +1,11 @@
-import express, { Request, Response } from "express";
-import User from "../../database/models/User";
+import express from "express";
+import { verifyEmailController } from "../controllers/user.controller";
 const router = express.Router();
 
 
 
-
-router.get('/verify-email/:token', async (req: Request, res: Response) => {
-
-    const _user = await User.findOne({ authToken: req.params.token })
-    if (!_user) return res.json({ status: false, message: 'invalid token!' })
-
-    _user.authToken = 'verified';
-    _user.accountStatus = 'active'
-    await _user.save()
-
-    res.json({
-        status: true,
-        message: 'You have successfully done your job.',
-    })
-})
+// verify email address
+router.get('/verify-email/:token', verifyEmailController)
 
 
 export default router;

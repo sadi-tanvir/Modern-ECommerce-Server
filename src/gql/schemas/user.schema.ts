@@ -1,12 +1,42 @@
 export default `
     type Mutation {
-        signUpUser(data: UserData!): GeneralResponse
+        signUpUser(data: UserSignUpInputs!): GeneralResponse
+        loginUser(data:UserLoginInputs!): LoginResponse
     }
 
-    input UserData {
+    input UserSignUpInputs {
         name: String!
         email: String!
         password: String!
         phone: String!
+    }
+
+    type LoginResponse {
+        status: Boolean!
+        message: String!
+        token: String!
+        user: User
+    }
+
+    type User {
+        _id: ID
+        name: String
+        email: String
+        password: String
+        phone: String
+        image: String
+        role: String
+        gender: String
+        currentAddress: String
+        permanentAddress: String
+        dateOfBirth: String
+        authToken: String
+        accountStatus: String
+        darkMode: String
+    }
+
+    input UserLoginInputs {
+        email: String!
+        password: String!
     }
 `;
