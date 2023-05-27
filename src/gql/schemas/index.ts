@@ -1,5 +1,6 @@
-import globalSchema from "./global.schema"
-import userSchema from "./user.schema"
+import adminSchema from "./admin.schema";
+import globalSchema from "./global.schema";
+import userSchema from "./user.schema";
 
 const rootSchema = `
     type Query {
@@ -8,10 +9,11 @@ const rootSchema = `
     type Mutation {
         _:Boolean
     }
-`
+`;
 
 export default [
     rootSchema,
+    adminSchema,
     globalSchema,
     userSchema
-]
+];
