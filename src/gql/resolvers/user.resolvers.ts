@@ -1,10 +1,14 @@
 import User from "../../database/models/User"
 import sendEmail from "../../middlewares/sendMail";
-import { UserType } from "../../types/resolvers.types";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
+interface UserType {
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+}
 
 const userResolver = {
     Query: {},

@@ -1,8 +1,9 @@
 import adminSchema from "./admin.schema";
 import globalSchema from "./global.schema";
 import userSchema from "./user.schema";
+import productSchema from "./product.schema";
 
-const rootSchema = `
+const rootSchema = `#graphql
     type Query {
         _:Boolean
     }
@@ -15,5 +16,6 @@ export default [
     rootSchema,
     adminSchema,
     globalSchema,
-    userSchema
+    userSchema,
+    productSchema
 ];

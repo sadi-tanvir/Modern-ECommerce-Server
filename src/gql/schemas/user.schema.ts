@@ -1,4 +1,4 @@
-export default `
+export default `#graphql
     type Mutation {
         signUpUser(data: UserSignUpInputs!): GeneralResponse
         loginUser(data:UserLoginInputs!): LoginResponse
@@ -33,6 +33,8 @@ export default `
         authToken: String
         accountStatus: String
         darkMode: String
+        createdAt: String
+        updatedAt: String
     }
 
     input UserLoginInputs {
