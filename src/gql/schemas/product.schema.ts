@@ -1,6 +1,7 @@
 export default `#graphql
     type Query {
         products: [Product]
+        getProductById(id:ID!): Product
     }
 
     type Mutation {

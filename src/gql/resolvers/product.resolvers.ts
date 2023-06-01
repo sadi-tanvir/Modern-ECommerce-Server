@@ -18,13 +18,29 @@ interface ProductType {
 
 const productResolver = {
     Query: {
-        products:async (_:any, args: any, context: {email: string; role: string;}) => {
+        ////------>>> get all products <<<--------////
+        products: async (_: any, args: any, context: { email: string; role: string; }) => {
             // checking admin authentication
             checkAdminService(context.role);
 
             // getting from database
-            const _products = await Product.find();
+            const _products = await Product.find()
+                .populate('category.id')
+                .populate('brand.id');
             return _products;
+        },
+
+        ////------>>> Get a product by ID <<<--------////
+        getProductById: async (_: any, { id }: { id: string }, context: { email: string; role: string; }) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+            // getting from database
+            const _product = await Product.findOne({ _id: id })
+                .populate('category.id')
+                .populate('brand.id');
+
+            return _product;
         }
     },
 
