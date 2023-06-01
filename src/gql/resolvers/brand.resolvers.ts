@@ -17,7 +17,17 @@ interface BrandType {
 };
 
 const brandResolver = {
-    Query: {},
+    Query: {
+        ////------>>> get all brands <<<--------////
+        brands: async (_: any, args: any, context: { email: string; role: string; }) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+            
+            // getting from database
+            const _brands = await Brand.find();
+            return _brands
+        }
+    },
 
     Mutation: {
         ////------>>> create a brand <<<--------////
