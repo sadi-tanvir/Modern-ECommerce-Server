@@ -3,6 +3,7 @@ import globalSchema from "./global.schema";
 import userSchema from "./user.schema";
 import productSchema from "./product.schema";
 import brandSchema from "./brand.schema";
+import categorySchema from "./category.schema";
 
 const rootSchema = `#graphql
     type Query {
@@ -19,5 +20,6 @@ export default [
     globalSchema,
     userSchema,
     productSchema,
-    brandSchema
+    brandSchema,
+    categorySchema
 ];
