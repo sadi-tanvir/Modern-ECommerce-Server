@@ -13,20 +13,20 @@ export default `#graphql
     message: String!
   }
 
-  # type BrandRef {
-  #   id: Brand
-  #   name: String
-  # }
+  type BrandRef {
+    id: Brand
+    name: String
+  }
 
   input BrandInputRef {
     id: ID
     name: String
   }
 
-  # type CategoryRef {
-  #   id: Category
-  #   name: String
-  # }
+  type CategoryRef {
+    id: Category
+    name: String
+  }
 
   input CategoryInputRef {
     id: ID

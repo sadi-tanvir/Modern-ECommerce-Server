@@ -17,7 +17,16 @@ interface ProductType {
 };
 
 const productResolver = {
-    Query: {},
+    Query: {
+        products:async (_:any, args: any, context: {email: string; role: string;}) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+            // getting from database
+            const _products = await Product.find();
+            return _products;
+        }
+    },
 
     Mutation: {
         ////------>>> create a product <<<--------////

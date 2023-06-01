@@ -1,4 +1,8 @@
 export default `#graphql
+    type Query {
+        products: [Product]
+    }
+
     type Mutation {
         createProduct(data: ProductInputs!): GeneralResponse
     }
@@ -12,13 +16,13 @@ export default `#graphql
         brand: BrandInputRef
     }
 
-    # type Product {
-    #     _id: ID
-    #     name: String!
-    #     description: String
-    #     unit: String
-    #     imageUrl: String
-    #     category: CategoryRef
-    #     brand: BrandRef
-    # }
+    type Product {
+        _id: ID
+        name: String!
+        description: String
+        unit: String
+        imageUrl: String
+        category: CategoryRef
+        brand: BrandRef
+    }
 `;
