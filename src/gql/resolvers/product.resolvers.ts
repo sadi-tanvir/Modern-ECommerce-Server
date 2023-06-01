@@ -47,7 +47,7 @@ const productResolver = {
 
             return {
                 status: true,
-                message: 'Signup has been successful!'
+                message: 'The Product has been created successfully!'
             };
         }
     }
