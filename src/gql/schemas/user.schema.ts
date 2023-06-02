@@ -1,4 +1,8 @@
 export default `#graphql
+    type Query {
+        ownerInfo: User
+    }
+
     type Mutation {
         signUpUser(data: UserSignUpInputs!): GeneralResponse
         loginUser(data:UserLoginInputs!): LoginResponse

@@ -11,7 +11,14 @@ interface UserType {
 }
 
 const userResolver = {
-    Query: {},
+    Query: {
+         ////------>>> get owner info using the ida <<<--------////
+        ownerInfo: async (_: any, args: any, context: { email: string, role: string }) => {
+            const { email } = context;
+            const ownerData = await User.findOne({ email })
+            return ownerData
+        }
+    },
 
     Mutation: {
         ////------>>> user signup <<<--------////
