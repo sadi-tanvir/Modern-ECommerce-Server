@@ -1,6 +1,7 @@
 export default `#graphql
     type Query {
         brands: [Brand]
+        getBrandById(id:ID!): Brand
     }
 
     type Mutation {

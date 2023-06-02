@@ -1,11 +1,6 @@
 import Brand from "../../database/models/Brand";
 import { checkAdminService } from "../services/admin.services";
-import { ObjectId } from "mongodb"
 
-interface CommonType {
-    id: string;
-    name: string;
-};
 
 interface BrandType {
     name: string;
@@ -22,10 +17,20 @@ const brandResolver = {
         brands: async (_: any, args: any, context: { email: string; role: string; }) => {
             // checking admin authentication
             checkAdminService(context.role);
-            
+
             // getting from database
             const _brands = await Brand.find();
             return _brands
+        },
+
+        ////------>>> get a brand using id <<<--------////
+        getBrandById: async (_: any, { id }: { id: string }, context: { email: string; role: string; }) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+             // getting from database
+            const _brand = await Brand.findOne({ _id: id });
+            return _brand;
         }
     },
 
