@@ -10,6 +10,7 @@ interface StockModelTypes {
     status: "in-stock" | "out-of-stock" | "discontinued";
     imageUrl?: string;
     price: number;
+    discount: number;
     quantity: number;
     category: {
         name: string;
@@ -74,6 +75,12 @@ const stockSchema = new Schema<StockModelTypes>({
         required: [true, "Price is required"],
         min: [0, "Price cannot be negative"],
 
+    },
+
+    discount: {
+        type: Number,
+        min: [0, "Price cannot be negative"],
+        default: 0
     },
 
     quantity: {

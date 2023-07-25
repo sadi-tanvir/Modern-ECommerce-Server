@@ -4,6 +4,7 @@ import userSchema from "./user.schema";
 import productSchema from "./product.schema";
 import brandSchema from "./brand.schema";
 import categorySchema from "./category.schema";
+import stockSchema from "./stock.schema";
 
 const rootSchema = `#graphql
     type Query {
@@ -21,5 +22,6 @@ export default [
     userSchema,
     productSchema,
     brandSchema,
-    categorySchema
+    categorySchema,
+    stockSchema
 ];

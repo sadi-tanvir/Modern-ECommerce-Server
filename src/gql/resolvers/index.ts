@@ -4,6 +4,7 @@ import userResolver from "./user.resolvers";
 import productResolver from "./product.resolvers";
 import brandResolver from "./brand.resolvers";
 import categoryResolver from "./category.resolvers";
+import stockResolver from "./stock.resolvers";
 
 export default [
     adminResolver,
@@ -12,4 +13,5 @@ export default [
     productResolver,
     brandResolver,
     categoryResolver,
+    stockResolver
 ];
