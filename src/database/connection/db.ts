@@ -3,7 +3,7 @@ import { connect } from "mongoose"
 // dotenv.config()
 
 // const MONGO_URI = `mongodb://localhost:27017/farm-management`
-const MONGO_URI = `mongodb://127.0.0.1:27017/farm-management`
+const MONGO_URI = `mongodb://127.0.0.1:27017/modern-commerce-app`
 // const MONGO_URI = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.8xgxmx2.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
 // mongodb connection
