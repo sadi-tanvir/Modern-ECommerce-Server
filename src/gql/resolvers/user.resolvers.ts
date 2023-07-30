@@ -12,7 +12,7 @@ interface UserType {
 
 const userResolver = {
     Query: {
-         ////------>>> get owner info using the ida <<<--------////
+        ////------>>> get owner info using the ida <<<--------////
         ownerInfo: async (_: any, args: any, context: { email: string, role: string }) => {
             const { email } = context;
             const ownerData = await User.findOne({ email })
@@ -54,13 +54,17 @@ const userResolver = {
         loginUser: async (_: any, { data }: { data: UserType }, context: any) => {
             const { email, password } = data;
 
+            if (!email || !password) {
+                throw new Error('credentials are required');
+            }
+
             // checking user existence
             const _user = await User.findOne({ email })
-            if (!_user) return { status: false, message: 'Invalid Credentials' }
+            if (!_user) throw new Error('Invalid Credentials');
 
             // verifying password
             const isPasswordMatch = await bcrypt.compare(password, _user.password);
-            if (!isPasswordMatch) return { status: false, message: 'Invalid Credentials' };
+            if (!isPasswordMatch) throw new Error('Invalid Credentials');
 
             // generating token
             const token = jwt.sign({ email, role: _user.role }, process.env.SECRET_KEY);

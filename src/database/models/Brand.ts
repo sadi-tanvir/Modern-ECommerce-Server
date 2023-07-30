@@ -8,8 +8,6 @@ interface BrandSchemaType extends Document {
     phone: string;
     website: string;
     location: string;
-    products: any[];
-    suppliers: any[];
     status: string;
 }
 
