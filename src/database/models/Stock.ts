@@ -21,10 +21,6 @@ interface StockModelTypes {
         name: string;
         id: Schema.Types.ObjectId;
     };
-    suppliedBy: {
-        name: string;
-        id: Schema.Types.ObjectId;
-    };
     createdAt: Date;
     updatedAt: Date;
 }
@@ -119,17 +115,6 @@ const stockSchema = new Schema<StockModelTypes>({
         id: {
             type: Schema.Types.ObjectId,
             ref: "Brand"
-        }
-    },
-    suppliedBy: {
-        name: {
-            type: String,
-            trim: true,
-            required: [true, "Please provide a supplier name"],
-        },
-        id: {
-            type: Schema.Types.ObjectId,
-            ref: "Supplier",
         }
     }
 

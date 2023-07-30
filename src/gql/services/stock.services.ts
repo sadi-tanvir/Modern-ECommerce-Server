@@ -19,10 +19,6 @@ export type StockServiceType = {
         name: string;
         id: string;
     }
-    suppliedBy: {
-        name: string;
-        id: string;
-    }
 }
 
 // create stock service
@@ -44,10 +40,6 @@ export const createStockService = async (data: StockServiceType) => {
         brand: {
             name: data.brand.name,
             id: new ObjectId(data.brand.id)
-        },
-        suppliedBy: {
-            name: data.suppliedBy.name,
-            id: new ObjectId(data.suppliedBy.id)
         }
     })
 
@@ -68,7 +60,6 @@ export const getStocksWithDetailsService = async () => {
         .populate('productId')
         .populate('brand.id')
         .populate('category.id')
-        .populate('suppliedBy.id')
 
     return stocks;
 }

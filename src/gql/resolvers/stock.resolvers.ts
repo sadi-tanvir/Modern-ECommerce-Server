@@ -26,10 +26,6 @@ export type StockType = {
             name: string;
             id: string;
         }
-        suppliedBy: {
-            name: string;
-            id: string;
-        }
     }
 }
 
