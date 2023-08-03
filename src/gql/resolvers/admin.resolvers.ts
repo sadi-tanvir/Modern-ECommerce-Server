@@ -11,8 +11,6 @@ const adminResolver = {
             checkAdminService(context.role)
 
             const users = await User.find();
-            // console.log(users);
-
             return users
         },
     },

@@ -69,7 +69,7 @@ const stockResolver = {
 
             return {
                 status: true,
-                message: 'The Stock has created successfully',
+                message: 'The Stock has been created successfully',
                 stock: stock
             }
         },
