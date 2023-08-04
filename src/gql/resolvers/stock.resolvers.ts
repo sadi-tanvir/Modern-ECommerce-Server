@@ -31,39 +31,48 @@ export type StockType = {
 
 const stockResolver = {
     Query: {
-        stocks: async (_: any, args: any, context: ContextTypes) => {
-            // find all stocks
+        ////------>>> Get All Stocks <<<--------////
+        stocks: async (_: any, args: any) => {
             const stocks = await getStocksService()
             return stocks;
         },
-        getStocksByCategory: async (_: any, { category }: { category: string }, context: ContextTypes) => {
-            // find stocks by category
+
+        ////------>>> get stocks by category <<<--------////
+        getStocksByCategory: async (_: any, { category }: { category: string }) => {
             const stocks = await Stock.find({ 'category.name': category })
             return stocks;
         },
-        getStocksWithDetails: async (_: any, args: any, context: ContextTypes) => {
 
+        ////------>>> find all stocks with details for admin <<<--------////
+        getStocksWithDetails: async (_: any, args: any, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
-            // find all stocks
             const stocks = await getStocksWithDetailsService()
             return stocks;
         },
 
+        ////------>>> Get a stock with details by id <<<--------////
+        stockWithDetailsById: async (_: any, { id }: { id: string }) => {
+            const stock = await Stock.findOne({ _id: id })
+                .populate('category.id')
+                .populate('brand.id');
+            return stock;
+        }
+
     },
 
     Mutation: {
+        ////------>>> Create a New Stock <<<--------////
         createStock: async (_: any, { data }: StockType, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
             // is stock already exist?
             const isExistStock = await Stock.findOne({ name: data.name, 'brand.name': data.brand.name })
-
             if (isExistStock) throw new Error("The Stock already exist");
 
-            // create stock
+            // creating stock
             const stock = await createStockService(data)
             if (!stock) throw new Error("Failed to Create a Stock.")
 
@@ -73,7 +82,10 @@ const stockResolver = {
                 stock: stock
             }
         },
-        updateStockQuantity: async (_: any, { id, data }: { id: string; data: { reference: string; } }, context: ContextTypes) => {
+
+
+        ////------>>> Update Stock Quantity <<<--------////
+        updateStockQuantity: async (_: any, { id, data }: { id: string; data: { reference: string; } }) => {
             // update stock quantity
             if (data.reference === 'increase') {
                 const stock = await Stock.findOne({ _id: id })
@@ -94,10 +106,14 @@ const stockResolver = {
                 message: 'The Stock has updated successfully',
             }
         },
+
+
+        ////------>>> Delete a stock by id <<<--------////
         deleteStockById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
+            // deleting stock
             const stock = await Stock.findByIdAndDelete(id)
             if (!stock) throw new Error("Failed to Delete a Stock.")
 
@@ -106,10 +122,14 @@ const stockResolver = {
                 message: 'The stock has been deleted successfully',
             }
         },
+
+
+        ////------>>> Update a stock by id <<<--------////
         updateStockById: async (_: any, args: any, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
+            // updating stock
             const stock = await Stock.findOneAndUpdate({ _id: args.id }, args.data)
             if (!stock) throw new Error("Failed to Update the stock.")
 

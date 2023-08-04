@@ -4,6 +4,7 @@ export default `#graphql
         stocks: [Stock]
         getStocksByCategory(category: String!): [Stock]
         getStocksWithDetails: [Stock]
+        stockWithDetailsById(id: ID!): Stock
     }
 
     extend type Mutation {
