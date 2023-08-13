@@ -16,6 +16,7 @@ const categorySchema = new Schema<CategorySchemaType>({
         unique: true,
         lowercase: true
     },
+    imageUrl: String,
     description: String
 }, { timestamps: true })
 

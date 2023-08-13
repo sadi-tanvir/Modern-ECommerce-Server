@@ -10,11 +10,13 @@ export default `#graphql
     input CategoryInputData {
         name: String!
         description: String
+        imageUrl: String
     }
 
     type Category {
         _id: ID
         name: String!
         description: String
+        imageUrl: String
     }
 `;

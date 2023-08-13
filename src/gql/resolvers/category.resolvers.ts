@@ -4,6 +4,7 @@ import { checkAdminService } from "../services/admin.services";
 
 interface CategoryType {
     name: string;
+    imageUrl: string;
     description?: string;
 };
 
@@ -22,7 +23,7 @@ const categoryResolver = {
     Mutation: {
         ////------>>> create a category <<<--------////
         createCategory: async (_: any, { data }: { data: CategoryType }, context: any) => {
-            const { name, description } = data;
+            const { name, description, imageUrl } = data;
 
             // checking admin authentication
             checkAdminService(context.role);
@@ -30,7 +31,8 @@ const categoryResolver = {
             // creating the category
             const _category = new Category({
                 name,
-                description
+                description,
+                imageUrl
             });
 
             await _category.save();
