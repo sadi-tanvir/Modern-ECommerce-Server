@@ -20,6 +20,8 @@ interface StockModelTypes {
         name: string;
         id: Schema.Types.ObjectId;
     };
+    rating: number;
+    isTopSale: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -109,7 +111,17 @@ const stockSchema = new Schema<StockModelTypes>({
             type: Schema.Types.ObjectId,
             ref: "Brand"
         }
-    }
+    },
+    rating: {
+        type: Number,
+        default: 0,
+        min: [0, "Rating cannot be negative"],
+        max: [5, "Rating cannot be greater than 5"],
+    },
+    isTopSale: {
+        type: Boolean,
+        default: false,
+    },
 
 }, { timestamps: true });
 
