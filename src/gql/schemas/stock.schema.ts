@@ -15,7 +15,6 @@ export default `#graphql
     }
 
     input StockInputData {
-        productId: String!
         name: String!
         description: String
         unit: String
@@ -54,7 +53,6 @@ export default `#graphql
 
     type Stock {
         _id: ID
-        productId: Product
         name: String!
         description: String
         unit: String

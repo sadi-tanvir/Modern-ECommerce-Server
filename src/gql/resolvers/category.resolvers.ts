@@ -11,9 +11,6 @@ interface CategoryType {
 const categoryResolver = {
     Query: {
         categories: async (_: any, args: any, context: { email: string; role: string; }) => {
-            // checking admin authentication
-            // checkAdminService(context.role);
-
             // getting from database
             const _categories = await Category.find();
             return _categories;

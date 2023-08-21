@@ -3,7 +3,6 @@ import validator from "validator"
 
 // Define the interface for Stock document
 interface StockModelTypes {
-    productId: Schema.Types.ObjectId;
     name: string;
     description?: string;
     unit: "kg" | "litre" | "pcs" | "bag";
@@ -27,12 +26,6 @@ interface StockModelTypes {
 
 
 const stockSchema = new Schema<StockModelTypes>({
-    productId: {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
-        required: true
-    },
-
     name: {
         type: String,
         required: [true, "Please provide a name for this product"],

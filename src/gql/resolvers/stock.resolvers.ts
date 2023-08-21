@@ -9,7 +9,6 @@ export type ContextTypes = {
 
 export type StockType = {
     data: {
-        productId: string;
         name: string;
         description: string;
         unit: string;

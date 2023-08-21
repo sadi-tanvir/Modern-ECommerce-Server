@@ -2,7 +2,6 @@ import { ObjectId } from "mongodb";
 import Stock from "../../database/models/Stock";
 
 export type StockServiceType = {
-    productId: string;
     name: string;
     description: string;
     unit: string;
@@ -24,7 +23,6 @@ export type StockServiceType = {
 // create stock service
 export const createStockService = async (data: StockServiceType) => {
     const stock = await Stock.create({
-        productId: data.productId,
         name: data.name,
         description: data.description,
         unit: data.unit,
@@ -57,7 +55,6 @@ export const getStocksService = async () => {
 // find all stocks with details service
 export const getStocksWithDetailsService = async () => {
     const stocks = await Stock.find()
-        .populate('productId')
         .populate('brand.id')
         .populate('category.id')
 
