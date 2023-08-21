@@ -39,6 +39,8 @@ export default `#graphql
         status: String
         category: CategoryInputRef
         brand: BrandInputRef
+        rating: Int
+        isTopSale: Boolean
     }
 
     input StockUpdateInfo { 
@@ -64,5 +66,7 @@ export default `#graphql
         sellCount: Int
         category: CategoryRef
         brand: BrandRef
+        rating: Int
+        isTopSale: Boolean
     }
 `

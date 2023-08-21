@@ -114,8 +114,8 @@ const stockSchema = new Schema<StockModelTypes>({
     },
     rating: {
         type: Number,
-        default: 0,
-        min: [0, "Rating cannot be negative"],
+        default: 1,
+        min: [1, "Rating cannot be negative"],
         max: [5, "Rating cannot be greater than 5"],
     },
     isTopSale: {
