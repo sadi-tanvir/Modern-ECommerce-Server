@@ -6,6 +6,8 @@ export default `#graphql
 
     type Mutation {
         createBrand(data:BrandInputData!): GeneralResponse
+        updateBrandById(id:ID!, data: BrandUpdateInputData!): GeneralResponse
+        deleteBrandById(id: ID!): GeneralResponse
     }
 
     input BrandInputData {
@@ -14,6 +16,16 @@ export default `#graphql
         email: String!
         phone: String
         website: String
+        location: String
+    }
+
+    input BrandUpdateInputData {
+        name: String!
+        description: String
+        email: String!
+        phone: String
+        website: String
+        status: String
         location: String
     }
 

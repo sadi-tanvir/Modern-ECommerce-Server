@@ -1,6 +1,10 @@
 import Brand from "../../database/models/Brand";
 import { checkAdminService } from "../services/admin.services";
 
+export type ContextTypes = {
+    email: string;
+    role?: string;
+}
 
 interface BrandType {
     name: string;
@@ -9,12 +13,13 @@ interface BrandType {
     phone?: string;
     website?: string;
     location?: string;
+    status?: string;
 };
 
 const brandResolver = {
     Query: {
         ////------>>> get all brands <<<--------////
-        brands: async (_: any, args: any, context: { email: string; role: string; }) => {
+        brands: async (_: any, args: any, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
@@ -24,11 +29,11 @@ const brandResolver = {
         },
 
         ////------>>> get a brand using id <<<--------////
-        getBrandById: async (_: any, { id }: { id: string }, context: { email: string; role: string; }) => {
+        getBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
-             // getting from database
+            // getting from database
             const _brand = await Brand.findOne({ _id: id });
             return _brand;
         }
@@ -36,7 +41,7 @@ const brandResolver = {
 
     Mutation: {
         ////------>>> create a brand <<<--------////
-        createBrand: async (_: any, { data }: { data: BrandType }, context: any) => {
+        createBrand: async (_: any, { data }: { data: BrandType }, context: ContextTypes) => {
             const { name, description, email, phone, website, location, } = data;
 
             // checking admin authentication
@@ -58,7 +63,39 @@ const brandResolver = {
                 status: true,
                 message: 'The Brand has been created successfully!'
             };
-        }
+        },
+
+
+        ////------>>> Update a brand by id <<<--------////
+        updateBrandById: async (_: any, args: { id: string; data: BrandType }, context: ContextTypes) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+            // updating brand
+            const brand = await Brand.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!brand) throw new Error("Failed to Update the brand.")
+
+            return {
+                status: true,
+                message: 'The brand has been updated successfully'
+            };
+        },
+
+
+        ////------>>> Delete a brand by id <<<--------////
+        deleteBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+            // deleting brand
+            const brand = await Brand.findByIdAndDelete(id)
+            if (!brand) throw new Error("Failed to Delete the brand.")
+
+            return {
+                status: true,
+                message: 'The brand has been deleted successfully',
+            }
+        },
     }
 };
 
