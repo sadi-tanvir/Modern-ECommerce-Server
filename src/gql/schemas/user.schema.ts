@@ -5,7 +5,8 @@ export default `#graphql
 
     type Mutation {
         signUpUser(data: UserSignUpInputs!): GeneralResponse
-        loginUser(data:UserLoginInputs!): LoginResponse
+        loginUser(data: UserLoginInputs!): LoginResponse
+        updateOwnerInfo(email: String!, data: UpdateOwnerInput!): GeneralResponse
     }
 
     input UserSignUpInputs {
@@ -13,6 +14,20 @@ export default `#graphql
         email: String!
         password: String!
         phone: String!
+    }
+
+    input UserLoginInputs {
+        email: String!
+        password: String!
+    }
+
+    input UpdateOwnerInput {
+        name: String
+        phone: String
+        gender: String
+        currentAddress: String
+        permanentAddress: String
+        dateOfBirth: String
     }
 
     type LoginResponse {
@@ -39,10 +54,5 @@ export default `#graphql
         darkMode: String
         createdAt: String
         updatedAt: String
-    }
-
-    input UserLoginInputs {
-        email: String!
-        password: String!
     }
 `;

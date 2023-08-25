@@ -3,11 +3,25 @@ import sendEmail from "../../middlewares/sendMail";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+type ContextType = {
+    email: string;
+    role: string;
+}
+
 interface UserType {
     name: string;
     email: string;
     password: string;
     phone: string;
+}
+
+type OwnerUpdateInputType = {
+    name: string;
+    phone: string;
+    gender: string;
+    currentAddress: string;
+    permanentAddress: string;
+    dateOfBirth: string;
 }
 
 const userResolver = {
@@ -75,7 +89,35 @@ const userResolver = {
                 token,
                 user: _user
             };
-        }
+        },
+
+
+
+        ////------>>> Update Owner Information <<<--------////
+        updateOwnerInfo: async (_: any, args: { email: string; data: OwnerUpdateInputType }, context: ContextType) => {
+            const { name, phone, gender, currentAddress, permanentAddress, dateOfBirth } = args.data;
+
+            // updating Owner Info
+            const owner = await User.findOneAndUpdate(
+                { email: context.email },
+                {
+                    $set: {
+                        name,
+                        phone,
+                        gender,
+                        currentAddress,
+                        permanentAddress,
+                        dateOfBirth,
+                    }
+                }
+            )
+            if (!owner) throw new Error("Failed to Update Your Information.")
+
+            return {
+                status: true,
+                message: 'Your information has been updated successfully.'
+            };
+        },
     }
 };
 
