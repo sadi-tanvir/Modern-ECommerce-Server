@@ -19,7 +19,7 @@ const sendEmail = (email: string, token: string) => {
                 <br/>
                 <br/>
                 <br/>
-                <a href="http://localhost:4000/api/user/verify-email/${token}">Confirm Your Email</a>`
+                <a href=${process.env.API_URL_FOR_SENDING_EMAIL}/api/user/verify-email/${token}>Confirm Your Email</a>`
     };
 
 
