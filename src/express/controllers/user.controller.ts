@@ -35,9 +35,8 @@ const passwordChangingController = async (req: Request, res: Response) => {
     if (!updatePassword) return res.status(400).json({ message: 'failed to update password' });
 
     res.json({
-        pass: _user.password,
-        match: isMathPass,
-        updatePassword
+        status: true,
+        message: "Password updated successfully."
     })
 }
 
