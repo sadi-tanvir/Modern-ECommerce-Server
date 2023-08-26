@@ -109,13 +109,15 @@ const userResolver = {
                         permanentAddress,
                         dateOfBirth,
                     }
-                }
+                },
+                { new: true }
             )
             if (!owner) throw new Error("Failed to Update Your Information.")
 
             return {
                 status: true,
-                message: 'Your information has been updated successfully.'
+                message: 'Successfully updated',
+                owner: owner
             };
         },
     }

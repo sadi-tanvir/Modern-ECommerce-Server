@@ -6,7 +6,7 @@ export default `#graphql
     type Mutation {
         signUpUser(data: UserSignUpInputs!): GeneralResponse
         loginUser(data: UserLoginInputs!): LoginResponse
-        updateOwnerInfo(email: String!, data: UpdateOwnerInput!): GeneralResponse
+        updateOwnerInfo(email: String!, data: UpdateOwnerInput!): UpdateResponse
     }
 
     input UserSignUpInputs {
@@ -35,6 +35,12 @@ export default `#graphql
         message: String!
         token: String!
         user: User
+    }
+
+    type UpdateResponse {
+        status: Boolean!
+        message: String!
+        owner: User
     }
 
     type User {
