@@ -33,6 +33,7 @@ await server.start();
 app.use('/', cors<cors.CorsRequest>(), bodyParser.json());
 app.use(express.urlencoded({ extended: false }))
 app.use("/graphql", expressMiddleware(server, { context }));
+app.use(express.static('public'));
 
 // routes
 app.use('/api/user', userRoutes)

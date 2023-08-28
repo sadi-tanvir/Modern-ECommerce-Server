@@ -1,5 +1,6 @@
 import express from "express";
-import { passwordChangingController, verifyEmailController } from "../controllers/user.controller";
+import multer from "multer"
+import { passwordChangingController, profilePicUpload, profileStorage, verifyEmailController } from "../controllers/user.controller";
 import auth from "../../middlewares/auth";
 const router = express.Router();
 
@@ -25,6 +26,11 @@ router.get('/verify-email/:token', verifyEmailController)
 
 // update password
 router.post('/change-password', auth, passwordChangingController)
+
+
+// profile pic upload
+const uploadProfile = multer({ storage: profileStorage })
+router.put('/profile-pic-upload', auth, uploadProfile.single('profile_photo'), profilePicUpload)
 
 
 export default router;

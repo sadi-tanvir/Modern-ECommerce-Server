@@ -43,7 +43,7 @@ const userSchema = new Schema<UserSchemaType>({
     },
     image: {
         type: String,
-        default: "empty-avatar.png"
+        default: "empty-avatar.jpg"
     },
     role: {
         type: String,
@@ -83,5 +83,6 @@ const userSchema = new Schema<UserSchemaType>({
         default: false
     }
 }, { timestamps: true });
+
 
 export default model<UserSchemaType>('User', userSchema);
