@@ -15,7 +15,7 @@ import context from "./middlewares/context"
 import "./database/connection/db"
 
 // routes
-import userRoutes from "./express/routes/user.routes"
+import userRoutes from "./express/routes/user.routes";
 
 // create server
 const app = express();
@@ -36,7 +36,7 @@ app.use("/graphql", expressMiddleware(server, { context }));
 app.use(express.static('public'));
 
 // routes
-app.use('/api/user', userRoutes)
+app.use('/api/user', userRoutes);
 
 // Modified server startup
 await new Promise<void>((resolve) => httpServer.listen({ port: process.env.PORT }, resolve));
