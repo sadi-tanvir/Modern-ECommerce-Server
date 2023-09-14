@@ -6,7 +6,9 @@ export default `#graphql
 
   type Query {
     books: [Book]
+    booksByName(author: String): Book
   }
+  
 
   type GeneralResponse {
     status: Boolean!

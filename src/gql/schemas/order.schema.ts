@@ -1,10 +1,12 @@
 export default `#graphql
     type Query {
         orders: [Order]
+        getOrdersByCustomerId(id:ID!): [Order]
     }
 
     type Mutation {
         createOrder(data: OrderInputs!): GeneralResponse
+        deleteOrderById(id:ID!): GeneralResponse
     }
 
     input ItemsInput {

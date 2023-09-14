@@ -3,10 +3,11 @@ import User from "../../database/models/User";
 import { checkAdminService } from "../services/admin.services";
 import { ObjectId } from "mongodb"
 
-interface CommonType {
-    id: string;
-    name: string;
-};
+
+export type ContextTypes = {
+    email: string;
+    role?: string;
+}
 
 interface ItemsType {
     stockId: any,
@@ -41,6 +42,19 @@ const orderResolver = {
                 .populate('items.stockId');
             return orders;
         },
+
+
+        ////------>>> get all orders of a specific customer <<<--------////
+        getOrdersByCustomerId: async (_: any, args: any, context: { email: string; role: string; }) => {
+            const user = await User.findOne({ email: context.email })
+            if (!user) throw Error("User Not Found.")
+
+            // getting from database
+            const orders = await Order.find({ userId: user._id })
+                .populate('userId')
+                .populate('items.stockId');
+            return orders;
+        },
     },
 
     Mutation: {
@@ -67,7 +81,22 @@ const orderResolver = {
                 status: true,
                 message: 'The Order has been created successfully!'
             };
-        }
+        },
+
+        ////------>>> Delete an order by id <<<--------////
+        deleteOrderById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin authentication
+            checkAdminService(context.role);
+
+            // deleting order
+            const order = await Order.findByIdAndDelete(id)
+            if (!order) throw new Error("Failed to Delete the order.")
+
+            return {
+                status: true,
+                message: 'The order has been deleted successfully',
+            }
+        },
     }
 };
 
