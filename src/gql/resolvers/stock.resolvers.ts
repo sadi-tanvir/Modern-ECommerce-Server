@@ -31,8 +31,8 @@ export type StockType = {
 const stockResolver = {
     Query: {
         ////------>>> Get All Stocks <<<--------////
-        stocks: async (_: any, args: any) => {
-            const stocks = await getStocksService()
+        stocks: async (_: any, { page, size }: { page?: number, size?: number }) => {
+            const stocks = await getStocksService({ page: page, size: size })
             return stocks;
         },
 

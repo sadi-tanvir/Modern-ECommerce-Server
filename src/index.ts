@@ -16,6 +16,7 @@ import "./database/connection/db"
 
 // routes
 import userRoutes from "./express/routes/user.routes";
+import stockRoute from "./express/routes/stock.routes";
 
 // create server
 const app = express();
@@ -37,6 +38,7 @@ app.use(express.static('public'));
 
 // routes
 app.use('/api/user', userRoutes);
+app.use('/api/stock', stockRoute);
 
 // Modified server startup
 await new Promise<void>((resolve) => httpServer.listen({ port: process.env.PORT }, resolve));

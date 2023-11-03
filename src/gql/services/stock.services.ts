@@ -46,8 +46,8 @@ export const createStockService = async (data: StockServiceType) => {
 
 
 // find all stocks service
-export const getStocksService = async () => {
-    const stocks = await Stock.find()
+export const getStocksService = async ({ page, size }: { page: number, size: number }) => {
+    const stocks = await Stock.find().skip(page * size).limit(size)
 
     return stocks;
 }

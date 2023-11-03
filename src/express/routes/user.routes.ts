@@ -16,7 +16,7 @@ declare global {
 
 router.get('/', (req, res) => {
     res.json({
-        message: 'Hello from user routes 👋'
+        message: 'Hello from user routes - v2👋'
     })
 })
 
