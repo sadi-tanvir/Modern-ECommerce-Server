@@ -43,11 +43,11 @@ const stockResolver = {
         },
 
         ////------>>> find all stocks with details for admin <<<--------////
-        getStocksWithDetails: async (_: any, args: any, context: ContextTypes) => {
+        getStocksWithDetails: async (_: any, { page, size }: { page: number, size: number }, context: ContextTypes) => {
             // checking admin authentication
             checkAdminService(context.role);
 
-            const stocks = await getStocksWithDetailsService()
+            const stocks = await getStocksWithDetailsService({ page, size })
             return stocks;
         },
 

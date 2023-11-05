@@ -42,7 +42,7 @@ export const createStockService = async (data: StockServiceType) => {
     })
 
     return stock;
-}
+};
 
 
 // find all stocks service
@@ -50,13 +50,15 @@ export const getStocksService = async ({ page, size }: { page: number, size: num
     const stocks = await Stock.find().skip(page * size).limit(size)
 
     return stocks;
-}
+};
 
 // find all stocks with details service
-export const getStocksWithDetailsService = async () => {
+export const getStocksWithDetailsService = async ({ page, size }: { page: number; size: number }) => {
     const stocks = await Stock.find()
+        .skip(page * size)
+        .limit(size)
         .populate('brand.id')
         .populate('category.id')
 
     return stocks;
-}
+};

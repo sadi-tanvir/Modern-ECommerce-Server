@@ -3,7 +3,7 @@ export default `#graphql
     extend type Query {
         stocks(page:Int, size:Int): [Stock]
         getStocksByCategory(category: String!): [Stock]
-        getStocksWithDetails: [Stock]
+        getStocksWithDetails(page:Int, size:Int): [Stock]
         stockWithDetailsById(id: ID!): Stock
     }
 
