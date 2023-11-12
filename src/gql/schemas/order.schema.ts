@@ -1,7 +1,7 @@
 export default `#graphql
     type Query {
         orders: [Order]
-        getOrdersByCustomerId(id:ID!): [Order]
+        getOrdersByCustomerId: [Order]
     }
 
     type Mutation {
@@ -28,7 +28,7 @@ export default `#graphql
 
 
     type ItemsType {
-        stockId: Stock
+        stockId: Product
         qty: Int
         price: Int
         name: String

@@ -43,7 +43,7 @@ const orderSchema = new Schema<OrderType>({
     items: [{
         stockId: {
             type: Schema.Types.ObjectId,
-            ref: "Stock",
+            ref: "Product",
         },
         qty: Number,
         price: Number,

@@ -1,4 +1,5 @@
 import Order from "../../database/models/Order";
+import Product from "../../database/models/Product";
 import User from "../../database/models/User";
 import { checkAdminService } from "../services/admin.services";
 import { ObjectId } from "mongodb"
@@ -46,6 +47,7 @@ const orderResolver = {
 
         ////------>>> get all orders of a specific customer <<<--------////
         getOrdersByCustomerId: async (_: any, args: any, context: { email: string; role: string; }) => {
+            // finding user from database
             const user = await User.findOne({ email: context.email })
             if (!user) throw Error("User Not Found.")
 
@@ -53,6 +55,7 @@ const orderResolver = {
             const orders = await Order.find({ userId: user._id })
                 .populate('userId')
                 .populate('items.stockId');
+
             return orders;
         },
     },
@@ -64,6 +67,15 @@ const orderResolver = {
 
             const user = await User.find({ email: context.email })
             if (!user) throw new Error("authorized user");
+
+            // update product's sell quantity and stock quantity
+            items.forEach(async (item) => {
+                const product = await Product.findOne({ _id: item.stockId });
+                if (!product) throw new Error("Failed to find product");
+                product.quantity = product.quantity - 1;
+                product.sellCount = product.sellCount + 1;
+                await product.save();
+            });
 
             // creating the order
             const order = new Order({

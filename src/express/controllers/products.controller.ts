@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import Stock from "../../database/models/Stock";
+import Product from "../../database/models/Product";
 
-// stock count
-export const stockContController = async (req: Request, res: Response) => {
-    const totalStocks = await Stock.find().estimatedDocumentCount()
-    if (!totalStocks) return res.status(400).json({ status: false, message: 'Failed to fetch product count' })
+// products count
+export const productsCountController = async (req: Request, res: Response) => {
+    const totalProducts = await Product.find().estimatedDocumentCount()
+    if (!totalProducts) return res.status(400).json({ status: false, message: 'Failed to fetch product count' })
 
     res.json({
         status: true,
-        totalDocuments: totalStocks
+        totalDocuments: totalProducts
     });
 };
